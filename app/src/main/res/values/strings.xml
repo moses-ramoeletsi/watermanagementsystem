@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Water Management System</string>
+
+    <string-array name="roles_array">
+        <item>Admin</item>
+        <item>WaterAuthority</item>
+        <item>User</item>
+    </string-array>
+
+    <string-array name="issue_types">
+        <item>Water leakage</item>
+        <item>Contamination</item>
+        <item>Low water pressure</item>
+        <item>No water supply</item>
+    </string-array>
+
+    <string-array name="feedback_type">
+        <item>Suggestion</item>
+        <item>Issue</item>
+    </string-array>
+
+</resources>

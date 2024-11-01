@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "554004916175",
+    "project_id": "watermanagementsystem-e4719",
+    "storage_bucket": "watermanagementsystem-e4719.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554004916175:android:43d208f06fb43d332f94ba",
+        "android_client_info": {
+          "package_name": "com.example.watermanagementsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwdge-iEeaapQ_Tkdhd1PzCdwpl-ivqhQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

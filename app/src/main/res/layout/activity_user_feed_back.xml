@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="User Feedback"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Your Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/contactsInput"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="Your contacts"
+        android:inputType="textPhonetic"
+        android:layout_marginTop="20dp"/>
+
+    <Spinner
+        android:id="@+id/feedbackSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        />
+
+    <EditText
+        android:id="@+id/detailsInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Feedback Details"
+        android:layout_marginTop="20dp"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:minHeight="120dp"
+        android:maxLines="6" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Feedback"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
