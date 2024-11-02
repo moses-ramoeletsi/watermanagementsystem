@@ -61,8 +61,8 @@ public class UserProfile extends AppCompatActivity {
     private void populateUserDetails(DocumentSnapshot documentSnapshot) {
         if (documentSnapshot.exists()) {
             String email = documentSnapshot.getString("email");
-            String phone = documentSnapshot.getString("phoneNumber");
-            String addr = documentSnapshot.getString("address");
+            String phone = documentSnapshot.getString("contacts");
+            String addr = documentSnapshot.getString("residentialAddress");
             String nationalIdVal = documentSnapshot.getString("nationalId");
 
             if (email != null && !email.isEmpty()) {

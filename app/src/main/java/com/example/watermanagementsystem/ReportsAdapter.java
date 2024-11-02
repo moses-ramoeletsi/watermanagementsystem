@@ -40,12 +40,7 @@ public class  ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.ReportV
         holder.locationText.setText(report.getLocation());
         holder.statusText.setText("Status: " + report.getStatus());
 
-        // Format timestamp
-        if (report.getTimestamp() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault());
-            String dateStr = sdf.format(report.getTimestamp().toDate());
-            holder.timestampText.setText(dateStr);
-        }
+        holder.timestampText.setText("Time" + report.getTimestamp());
 
         // Handle image
         if (report.getImageUrl() != null && !report.getImageUrl().isEmpty()) {
