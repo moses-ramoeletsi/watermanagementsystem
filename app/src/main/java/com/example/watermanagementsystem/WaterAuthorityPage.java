@@ -78,6 +78,11 @@ public class WaterAuthorityPage extends AppCompatActivity {
             Intent intent = new Intent(this, UserProfile.class);
             startActivity(intent);
         });
+
+        findViewById(R.id.card_data_insights).setOnClickListener(v -> {
+            Intent intent = new Intent(this, DataInsightsActivity.class);
+            startActivity(intent);
+        });
     }
 
 }

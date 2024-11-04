@@ -19,4 +19,22 @@
         <item>Issue</item>
     </string-array>
 
+    <string-array name="status_options">
+        <item>In Use</item>
+        <item>Under Repair</item>
+        <item>Maintenance Required</item>
+        <item>Out of Service</item>
+        <item>Limited Access</item>
+    </string-array>
+
+    <string name="add_water_source">Add Water Source</string>
+    <string name="source_name_hint">Source Name</string>
+    <string name="description_hint">Description</string>
+    <string name="directions_hint">Directions</string>
+    <string name="status_hint">Status</string>
+    <string name="maintenance_date">Last Maintenance: %1$s</string>
+    <string name="contact_info">Contact: %1$s</string>
+    <string name="error_empty_fields">Please fill all fields</string>
+    <string name="success_add_source">Water source added successfully</string>
+    <string name="error_add_source">Error adding water source</string>
 </resources>
