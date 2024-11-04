@@ -33,9 +33,11 @@ public class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
     private Context context;
     private FirebaseFirestore db;
+    private boolean isWaterAuthority;
 
-    public WaterSourceAdapter(List<WaterSource> waterSources) {
+    public WaterSourceAdapter(List<WaterSource> waterSources, boolean isWaterAuthority) {
         this.waterSources = waterSources;
+        this.isWaterAuthority = isWaterAuthority;
         this.db = FirebaseFirestore.getInstance();
     }
 
@@ -59,9 +61,14 @@ public class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.
                 dateFormat.format(source.getLastMaintenanceDate()));
         holder.contactText.setText("Contact: " + source.getUserEmail());
 
+        holder.editButton.setVisibility(isWaterAuthority ? View.VISIBLE : View.GONE);
+        holder.deleteButton.setVisibility(isWaterAuthority ? View.VISIBLE : View.GONE);
 
-        holder.editButton.setOnClickListener(v -> showEditDialog(source, holder.getAdapterPosition()));
-        holder.deleteButton.setOnClickListener(v -> showDeleteConfirmation(source, holder.getAdapterPosition()));
+
+        if (isWaterAuthority) {
+            holder.editButton.setOnClickListener(v -> showEditDialog(source, holder.getAdapterPosition()));
+            holder.deleteButton.setOnClickListener(v -> showDeleteConfirmation(source, holder.getAdapterPosition()));
+        }
     }
 
     private void showEditDialog(WaterSource source, int position) {
@@ -197,6 +204,12 @@ public class WaterSourceAdapter extends RecyclerView.Adapter<WaterSourceAdapter.
     @Override
     public int getItemCount() {
         return waterSources.size();
+    }
+
+    public void updateData(List<WaterSource> newWaterSources) {
+        waterSources.clear();
+        waterSources.addAll(newWaterSources);
+        notifyDataSetChanged();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
