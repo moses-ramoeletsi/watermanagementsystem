@@ -2,9 +2,9 @@
     <string name="app_name">Water Management System</string>
 
     <string-array name="roles_array">
-        <item>Admin</item>
-        <item>WaterAuthority</item>
-        <item>User</item>
+        <item>Select Role</item>
+        <item>user</item>
+        <item>waterAuthority</item>
     </string-array>
 
     <string-array name="issue_types">

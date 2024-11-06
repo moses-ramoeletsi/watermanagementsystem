@@ -38,6 +38,19 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableLeft="@drawable/baseline_person_24"
+                    android:drawablePadding="8dp"
+                    android:hint="Full Name"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#A0A0A0" />
+
+                <EditText
                     android:id="@+id/nationalId"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -60,6 +73,20 @@
                     android:drawablePadding="8dp"
                     android:hint="residential address"
                     android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#A0A0A0" />
+
+                <EditText
+                    android:id="@+id/physicalAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom_edittext"
+                    android:drawableLeft="@drawable/baseline_location_on_24"
+                    android:drawablePadding="8dp"
+                    android:hint="Physical Address"
+                    android:padding="8dp"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textColorHint="#A0A0A0" />
 
@@ -102,7 +129,7 @@
                     android:inputType="textPassword"
                     android:padding="8dp"
                     android:textColor="@color/black"
-                    android:textColorHint="#A0A0A0"/>
+                    android:textColorHint="#A0A0A0" />
 
                 <EditText
                     android:id="@+id/confirmPassword"
@@ -115,16 +142,16 @@
                     android:hint="Confirm Password"
                     android:inputType="textPassword"
                     android:padding="8dp"
-                    android:textColorHint="#A0A0A0"/>
+                    android:textColorHint="#A0A0A0" />
 
                 <Spinner
                     android:id="@+id/roleSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:textSize="18sp"
                     android:padding="12dp"
                     android:background="@drawable/custom_edittext"
-                    android:layout_marginTop="9dp"/>
+                    android:layout_marginTop="9dp" />
 
                 <Button
                     android:id="@+id/signup_button"
@@ -135,8 +162,6 @@
                     android:backgroundTint="@color/blue"
                     android:text="Sign Up"
                     android:textSize="18sp" />
-
-
 
 
                 <TextView
