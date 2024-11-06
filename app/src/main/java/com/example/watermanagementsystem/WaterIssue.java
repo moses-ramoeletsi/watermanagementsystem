@@ -12,7 +12,6 @@ public class WaterIssue {
     private String lastUpdatedBy;
     private String lastUpdatedAt;
 
-    // Updated constructor with userInfo
     public WaterIssue(String id, String issueType, String location, String status,
                       String imageUrl, String timestamp, UserInfo userInfo, String lastUpdatedBy, String lastUpdatedAt) {
         this.id = id;
@@ -26,11 +25,9 @@ public class WaterIssue {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
-    // Empty constructor required for Firestore
     public WaterIssue() {
     }
 
-    // Existing getters and setters
     public String getId() {
         return id;
     }
@@ -87,6 +84,7 @@ public class WaterIssue {
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
+
     public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
@@ -104,7 +102,6 @@ public class WaterIssue {
     }
 }
 
-// New UserInfo class to store user details
 class UserInfo {
     private String email;
     private String phoneNumber;

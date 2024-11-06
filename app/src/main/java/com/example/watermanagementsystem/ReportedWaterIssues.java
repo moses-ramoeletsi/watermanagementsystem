@@ -25,7 +25,7 @@ public class ReportedWaterIssues extends AppCompatActivity {
     private View progressBar;
 
     private FirebaseAuth auth;
-    private  String currentUserEmail;
+    private String currentUserEmail;
 
 
     @Override
@@ -34,26 +34,23 @@ public class ReportedWaterIssues extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_reported_water_issues);
 
-        // Initialize views
         recyclerView = findViewById(R.id.recyclerView);
         progressBar = findViewById(R.id.progressBar);
 
-        // Initialize Firebase
+
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        // Get current user email
+
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
             currentUserEmail = currentUser.getEmail();
         }
 
-        // Setup RecyclerView
         adapter = new WaterIssuesAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        // Load water issues
         loadWaterIssues();
     }
 
@@ -76,7 +73,7 @@ public class ReportedWaterIssues extends AppCompatActivity {
                         for (com.google.firebase.firestore.DocumentSnapshot doc : value.getDocuments()) {
                             WaterIssue issue = doc.toObject(WaterIssue.class);
                             if (issue != null) {
-                                issue.setId(doc.getId()); // Set the document ID
+                                issue.setId(doc.getId());
                                 issues.add(issue);
                             }
                         }
@@ -91,10 +88,8 @@ public class ReportedWaterIssues extends AppCompatActivity {
             return;
         }
 
-        // Show progress
         progressBar.setVisibility(View.VISIBLE);
 
-        // Update Firestore document
         db.collection("waterIssues").document(reportId)
                 .update("status", newStatus, "lastUpdatedBy", currentUserEmail)
                 .addOnSuccessListener(aVoid -> {

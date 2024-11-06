@@ -23,7 +23,7 @@ public class UserRoleManager {
                 .get()
                 .addOnSuccessListener(document -> {
                     String role = document.getString("role");
-                    callback.onRoleChecked("WaterAuthority".equals(role));
+                    callback.onRoleChecked("waterAuthority".equals(role));
                 })
                 .addOnFailureListener(e -> callback.onRoleChecked(false));
     }

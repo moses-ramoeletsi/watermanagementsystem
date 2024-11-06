@@ -74,7 +74,6 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
     public void onBindViewHolder(@NonNull WaterIssueViewHolder holder, int position) {
         WaterIssue issue = issues.get(position);
 
-        // Handle image loading
         if (issue.getImageUrl() != null && !issue.getImageUrl().isEmpty()) {
             holder.issueImage.setVisibility(View.VISIBLE);
             Glide.with(holder.itemView.getContext())
@@ -84,13 +83,11 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
             holder.issueImage.setVisibility(View.GONE);
         }
 
-        // Set text fields
         holder.issueType.setText("Issue: " + issue.getIssueType());
         holder.location.setText("Location: " + issue.getLocation());
         holder.status.setText("Status: " + issue.getStatus());
         holder.timestamp.setText("Reported: " + issue.getTimestamp());
 
-        // Set user info
         UserInfo userInfo = issue.getUserInfo();
         if (userInfo != null) {
             holder.email.setText("Email: " + userInfo.getEmail());

@@ -104,20 +104,20 @@ public class CleanWaterSource extends AppCompatActivity {
     }
 
     private void getNearbyWaterSources() {
-        // Check if location permission is granted
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_LOCATION_PERMISSION);
             return;
         }
 
-        // Get the user's current location
+
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, location -> {
                     if (location != null) {
                         double userLatitude = location.getLatitude();
                         double userLongitude = location.getLongitude();
 
-                        // Load water sources from Firestore
+
                         db.collection("waterSources")
                                 .get()
                                 .addOnCompleteListener(task -> {
@@ -127,11 +127,10 @@ public class CleanWaterSource extends AppCompatActivity {
                                             WaterSource source = document.toObject(WaterSource.class);
                                             source.setDocumentId(document.getId());
 
-                                            // Calculate the distance between the user and the water source
                                             double[] sourceCoordinates = parseCoordinates(source.getDirections());
                                             double distance = calculateDistance(userLatitude, userLongitude, sourceCoordinates[0], sourceCoordinates[1]);
 
-                                            // Add the water source to the list if it's within the proximity radius
+                                            // Add the wat
                                             if (distance <= PROXIMITY_RADIUS) {
                                                 nearbyWaterSources.add(source);
                                             }
