@@ -38,14 +38,13 @@ public class ContactFormActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
-        // Initialize views
         messageEditText = findViewById(R.id.messageEditText);
         subjectEditText = findViewById(R.id.subjectEditText);
         sendButton = findViewById(R.id.sendButton);
         progressBar = findViewById(R.id.progressBar);
         authorityInfoText = findViewById(R.id.authorityInfoText);
 
-        // Get selected authority from intent
+
         selectedAuthority = getIntent().getParcelableExtra("selected_authority");
         if (selectedAuthority != null) {
             authorityInfoText.setText("Sending message to: " + selectedAuthority.getEmail());
@@ -71,15 +70,16 @@ public class ContactFormActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         sendButton.setEnabled(false);
 
-        // Get the current user's name from Firestore
         db.collection("users")
                 .document(auth.getCurrentUser().getUid())
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     String senderName = documentSnapshot.getString("name");
+                    String senderContacts = documentSnapshot.getString("contacts");
                     Message contactMessage = new Message(
                             auth.getCurrentUser().getUid(),
                             senderName,
+                            senderContacts,
                             selectedAuthority.getUserId(),
                             subject,
                             message

@@ -32,7 +32,7 @@ public class AuthorityMessageAdapter extends RecyclerView.Adapter<AuthorityMessa
         Message message = messages.get(position);
         holder.senderNameTextView.setText("From: " + message.getSenderName());
         holder.messageTextView.setText("Message: " + message.getContent());
-
+        holder.contactsTextView.setText("Contacts: " + message.getSenderContacts());
     }
 
     @Override
@@ -48,11 +48,13 @@ public class AuthorityMessageAdapter extends RecyclerView.Adapter<AuthorityMessa
     static class MessageViewHolder extends RecyclerView.ViewHolder {
         TextView senderNameTextView;
         TextView messageTextView;
+        TextView contactsTextView;
 
         public MessageViewHolder(@NonNull View itemView) {
             super(itemView);
             senderNameTextView = itemView.findViewById(R.id.senderNameId);
             messageTextView = itemView.findViewById(R.id.messageTextView);
+            contactsTextView = itemView.findViewById(R.id.contactsTextView);
         }
     }
 }

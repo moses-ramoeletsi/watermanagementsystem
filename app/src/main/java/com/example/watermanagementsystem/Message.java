@@ -5,6 +5,7 @@ public class Message {
     private String senderId;
 
 
+    private String senderContacts;
     private String senderName;
     private String recipientId;
     private String subject;
@@ -16,10 +17,11 @@ public class Message {
 
     }
 
-    public Message(String senderId, String senderName, String recipientId, String subject,
+    public Message(String senderId, String senderName, String senderContacts, String recipientId, String subject,
                    String content) {
         this.senderId = senderId;
         this.senderName = senderName;
+        this.senderContacts = senderContacts;
         this.recipientId = recipientId;
         this.subject = subject;
         this.content = content;
@@ -43,6 +45,13 @@ public class Message {
         this.senderName = senderName;
     }
 
+    public String getSenderContacts() {
+        return senderContacts;
+    }
+
+    public void setSenderContacts(String senderContacts) {
+        this.senderContacts = senderContacts;
+    }
 
     public String getRecipientId() {
         return recipientId;
