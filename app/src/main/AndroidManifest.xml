@@ -15,6 +15,9 @@
         android:theme="@style/Theme.WaterManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".WaterAuthorityMessages"
+            android:exported="false" />
+        <activity
             android:name=".SentMessagesActivity"
             android:exported="false" />
         <activity

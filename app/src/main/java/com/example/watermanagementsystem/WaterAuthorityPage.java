@@ -19,6 +19,7 @@ public class WaterAuthorityPage extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private TextView avatarText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +71,7 @@ public class WaterAuthorityPage extends AppCompatActivity {
         });
 
         findViewById(R.id.card_contact_authorities).setOnClickListener(v -> {
-            Intent intent = new Intent(this, ContactAuthoritiesActivity.class);
+            Intent intent = new Intent(this, WaterAuthorityMessages.class);
             startActivity(intent);
         });
 

@@ -1,6 +1,7 @@
 package com.example.watermanagementsystem;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,44 +71,53 @@ public class ContactFormActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         sendButton.setEnabled(false);
 
-        // Create message object with formatted timestamp
+        // Get the current user's name from Firestore
+        db.collection("users")
+                .document(auth.getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    String senderName = documentSnapshot.getString("name");
+                    Message contactMessage = new Message(
+                            auth.getCurrentUser().getUid(),
+                            senderName,
+                            selectedAuthority.getUserId(),
+                            subject,
+                            message
+                    );
 
-// Then use it when creating a message:
-        Message contactMessage = new Message(
-                auth.getCurrentUser().getUid(),
-                selectedAuthority.getUserId(),
-                subject,
-                message
-        );
+                    // Save to Firestore
+                    db.collection("messages")
+                            .add(contactMessage)
+                            .addOnSuccessListener(documentReference -> {
+                                // Set the messageId to the Firestore document ID
+                                String documentId = documentReference.getId();
+                                contactMessage.setMessageId(documentId);
 
-
-        // Save to Firestore
-        db.collection("messages")
-                .add(contactMessage)
-                .addOnSuccessListener(documentReference -> {
-                    // Set the messageId to the Firestore document ID
-                    String documentId = documentReference.getId();
-                    contactMessage.setMessageId(documentId);
-
-                    // Update the document with the messageId
-                    documentReference.update("messageId", documentId)
-                            .addOnSuccessListener(aVoid -> {
-                                Toast.makeText(ContactFormActivity.this,
-                                        "Message sent successfully", Toast.LENGTH_SHORT).show();
-                                finish();
+                                // Update the document with the messageId
+                                documentReference.update("messageId", documentId)
+                                        .addOnSuccessListener(aVoid -> {
+                                            Toast.makeText(ContactFormActivity.this,
+                                                    "Message sent successfully", Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(ContactFormActivity.this,
+                                                    "Failed to update messageId: " + e.getMessage(),
+                                                    Toast.LENGTH_SHORT).show();
+                                            progressBar.setVisibility(View.GONE);
+                                            sendButton.setEnabled(true);
+                                        });
                             })
                             .addOnFailureListener(e -> {
                                 Toast.makeText(ContactFormActivity.this,
-                                        "Failed to update messageId: " + e.getMessage(),
+                                        "Failed to send message: " + e.getMessage(),
                                         Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                                 sendButton.setEnabled(true);
                             });
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(ContactFormActivity.this,
-                            "Failed to send message: " + e.getMessage(),
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Failed to get user name: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     sendButton.setEnabled(true);
                 });

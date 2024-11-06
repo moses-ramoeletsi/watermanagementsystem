@@ -3,6 +3,9 @@ package com.example.watermanagementsystem;
 public class Message {
     private String messageId;
     private String senderId;
+
+
+    private String senderName;
     private String recipientId;
     private String subject;
     private String content;
@@ -13,9 +16,10 @@ public class Message {
 
     }
 
-    public Message(String senderId, String recipientId, String subject,
+    public Message(String senderId, String senderName, String recipientId, String subject,
                    String content) {
         this.senderId = senderId;
+        this.senderName = senderName;
         this.recipientId = recipientId;
         this.subject = subject;
         this.content = content;
@@ -30,6 +34,15 @@ public class Message {
     public void setSenderId(String senderId) {
         this.senderId = senderId;
     }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
 
     public String getRecipientId() {
         return recipientId;

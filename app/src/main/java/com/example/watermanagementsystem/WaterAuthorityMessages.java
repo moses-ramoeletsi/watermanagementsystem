@@ -1,33 +1,27 @@
 package com.example.watermanagementsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactAuthoritiesActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private AuthoritiesAdapter adapter;
+public class WaterAuthorityMessages extends AppCompatActivity {
+    private RecyclerView messagesRecyclerView;
+    private AuthorityMessageAdapter messagesAdapter;
     private TextView errorMessageTextView;
     private ProgressBar progressBar;
     private FirebaseFirestore db;
@@ -36,61 +30,58 @@ public class ContactAuthoritiesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_contact_authorities);
+        setContentView(R.layout.activity_water_authority_messages);
+
+        // Initialize FirebaseFirestore
         db = FirebaseFirestore.getInstance();
 
         // Initialize views
-        recyclerView = findViewById(R.id.authoritiesRecyclerView);
+        messagesRecyclerView = findViewById(R.id.authoritiesRecyclerView);
         errorMessageTextView = findViewById(R.id.errorMessageTextView);
         progressBar = findViewById(R.id.progressBar);
 
         // Setup RecyclerView
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AuthoritiesAdapter(this, new ArrayList<>(), authority -> {
-            Intent intent = new Intent(this, ContactFormActivity.class);
-            intent.putExtra("selected_authority", authority);
-            startActivity(intent);
-        });
-        recyclerView.setAdapter(adapter);
+        messagesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messagesAdapter = new AuthorityMessageAdapter(this, new ArrayList<>());
+        messagesRecyclerView.setAdapter(messagesAdapter);
 
-        // Load authorities
-        loadWaterAuthorities();
+        // Load messages
+        loadMessages();
     }
 
-
-    private void loadWaterAuthorities() {
+    private void loadMessages() {
         showProgress();
 
-        db.collection("users")
-                .whereEqualTo("role", "waterAuthority")
+        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        db.collection("messages")
+                .whereEqualTo("recipientId", currentUserId)
                 .get()
                 .addOnCompleteListener(task -> {
                     hideProgress();
 
                     if (task.isSuccessful()) {
-                        List<UserDetails> authorities = new ArrayList<>();
-
+                        List<Message> messages = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            UserDetails authority = document.toObject(UserDetails.class);
-                            authority.setUserId(document.getId()); // Set the document ID as userId
-                            authorities.add(authority);
+                            Message message = document.toObject(Message.class);
+                            messages.add(message);
                         }
 
-                        if (authorities.isEmpty()) {
+                        if (messages.isEmpty()) {
                             showError();
                         } else {
-                            showAuthorities(authorities);
+                            showMessages(messages);
                         }
                     } else {
                         showError();
-                        Log.e("ContactAuthorities", "Error getting authorities", task.getException());
+                        Log.e("WaterAuthorityMessages", "Error getting messages", task.getException());
                     }
                 });
     }
 
     private void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
+        messagesRecyclerView.setVisibility(View.GONE);
         errorMessageTextView.setVisibility(View.GONE);
     }
 
@@ -100,12 +91,12 @@ public class ContactAuthoritiesActivity extends AppCompatActivity {
 
     private void showError() {
         errorMessageTextView.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
+        messagesRecyclerView.setVisibility(View.GONE);
     }
 
-    private void showAuthorities(List<UserDetails> authorities) {
-        recyclerView.setVisibility(View.VISIBLE);
+    private void showMessages(List<Message> messages) {
+        messagesRecyclerView.setVisibility(View.VISIBLE);
         errorMessageTextView.setVisibility(View.GONE);
-        adapter.updateAuthorities(authorities);
+        messagesAdapter.updateMessages(messages);
     }
 }

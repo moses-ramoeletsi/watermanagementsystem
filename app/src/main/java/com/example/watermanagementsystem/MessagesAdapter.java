@@ -67,6 +67,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             contentTextView = itemView.findViewById(R.id.messageTextView);
             editButton = itemView.findViewById(R.id.editButton);
             deleteButton = itemView.findViewById(R.id.deleteButton);
+
+            
         }
     }
 
