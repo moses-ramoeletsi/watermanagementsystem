@@ -1,9 +1,13 @@
 package com.example.watermanagementsystem;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,6 +23,7 @@ public class UserProfile extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView avatarText;
     private TextView userEmail, phoneNumber, address, nationalId;
+    private Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,9 @@ public class UserProfile extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         avatarText = findViewById(R.id.avatar_text);
+        logoutButton = findViewById(R.id.logoutButton);
+
+        logoutButton.setOnClickListener(v -> showLogoutConfirmationDialog());
         initViews();
         setupUserDetails();
 
@@ -80,5 +88,37 @@ public class UserProfile extends AppCompatActivity {
                 nationalId.setText(nationalIdVal);
             }
         }
+    }
+
+    private void showLogoutConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    logout();
+                })
+                .setNegativeButton("No", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    private void logout() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Logging out...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        // Perform logout
+        mAuth.signOut();
+
+        // Dismiss progress dialog and navigate to login screen
+        progressDialog.dismiss();
+        Intent intent = new Intent(this, logIn.class);
+        // Clear the back stack so user can't go back after logging out
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }
