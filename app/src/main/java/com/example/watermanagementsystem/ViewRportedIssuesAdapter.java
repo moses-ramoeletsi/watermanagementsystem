@@ -4,40 +4,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.WaterIssueViewHolder> {
+public class ViewRportedIssuesAdapter extends RecyclerView.Adapter<ViewRportedIssuesAdapter.ViewReportedIssueViewHolder> {
+
     private List<WaterIssue> issues;
     private SimpleDateFormat dateFormat;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
-    public WaterIssuesAdapter () {
+    public ViewRportedIssuesAdapter () {
         this.issues = new ArrayList<> ();
         this.dateFormat = new SimpleDateFormat ("dd-MM-yyyy HH:mm", Locale.getDefault ());
         this.db = FirebaseFirestore.getInstance ();
         this.auth = FirebaseAuth.getInstance ();
     }
 
-    public static class WaterIssueViewHolder extends RecyclerView.ViewHolder {
+
+    public static class ViewReportedIssueViewHolder extends RecyclerView.ViewHolder {
         ImageView issueImage;
         TextView issueType;
         TextView location;
@@ -48,7 +44,7 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
         TextView lastUpdatedBy;
         View statusButton;
 
-        public WaterIssueViewHolder (@NonNull View itemView) {
+        public ViewReportedIssueViewHolder (@NonNull View itemView) {
             super (itemView);
             issueImage = itemView.findViewById (R.id.issueImage);
             issueType = itemView.findViewById (R.id.issueType);
@@ -64,14 +60,14 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
 
     @NonNull
     @Override
-    public WaterIssueViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int viewType) {
+    public ViewReportedIssueViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from (parent.getContext ())
                 .inflate (R.layout.item_water_issue, parent, false);
-        return new WaterIssueViewHolder (view);
+        return new ViewReportedIssueViewHolder (view);
     }
 
     @Override
-    public void onBindViewHolder (@NonNull WaterIssueViewHolder holder, int position) {
+    public void onBindViewHolder (@NonNull ViewRportedIssuesAdapter.ViewReportedIssueViewHolder holder, int position) {
         WaterIssue issue = issues.get (position);
 
         if ( issue.getImageUrl () != null && ! issue.getImageUrl ().isEmpty () ) {
@@ -97,56 +93,18 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
             holder.phoneNumber.setText ("Phone: N/A");
         }
 
-        // Set last updated by info
         if ( issue.getLastUpdatedBy () != null && ! issue.getLastUpdatedBy ().isEmpty () ) {
             holder.lastUpdatedBy.setVisibility (View.VISIBLE);
             holder.lastUpdatedBy.setText ("Last updated by: " + issue.getLastUpdatedBy ());
         } else {
             holder.lastUpdatedBy.setVisibility (View.GONE);
         }
+        holder.statusButton.setVisibility (View.GONE);
 
-        // Setup status update button
-        holder.statusButton.setOnClickListener (v -> showStatusUpdateMenu (v, issue));
-    }
-
-    private void showStatusUpdateMenu (View view, WaterIssue issue) {
-        FirebaseUser currentUser = auth.getCurrentUser ();
-        if ( currentUser == null ) {
-            Toast.makeText (view.getContext (), "You must be logged in to update status",
-                    Toast.LENGTH_SHORT).show ();
-            return;
-        }
-
-        PopupMenu popup = new PopupMenu (view.getContext (), view);
-        popup.getMenu ().add ("In Progress");
-        popup.getMenu ().add ("Resolved");
-
-        popup.setOnMenuItemClickListener (item -> {
-            String newStatus = item.getTitle ().toString ();
-            updateIssueStatus (issue, newStatus, currentUser.getEmail ());
-            return true;
-        });
-
-        popup.show ();
-    }
-
-    private void updateIssueStatus (WaterIssue issue, String newStatus, String userEmail) {
-        Map<String, Object> updates = new HashMap<> ();
-        updates.put ("status", newStatus);
-        updates.put ("lastUpdatedBy", userEmail);
-        updates.put ("lastUpdatedAt", new SimpleDateFormat ("dd-MM-yyyy HH:mm",
-                Locale.getDefault ()).format (new Date ()));
-
-        db.collection ("waterIssues")
-                .document (issue.getId ())
-                .update (updates)
-                .addOnSuccessListener (aVoid -> {
-                    // Update will be reflected through the snapshot listener
-                })
-                .addOnFailureListener (e -> {
-                    Toast.makeText (null, "Failed to update status: " + e.getMessage (),
-                            Toast.LENGTH_SHORT).show ();
-                });
+        ViewGroup.LayoutParams params = holder.itemView.getLayoutParams ();
+        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        holder.itemView.setLayoutParams (params);
     }
 
     @Override
