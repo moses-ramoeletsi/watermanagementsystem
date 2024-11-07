@@ -15,6 +15,12 @@
         android:theme="@style/Theme.WaterManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".ViewWaterReports"
+            android:exported="false" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".WaterAuthorityMessages"
             android:exported="false" />
         <activity

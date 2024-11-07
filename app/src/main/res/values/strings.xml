@@ -3,6 +3,7 @@
 
     <string-array name="roles_array">
         <item>Select Role</item>
+        <item>admin</item>
         <item>user</item>
         <item>waterAuthority</item>
     </string-array>
@@ -37,4 +38,5 @@
     <string name="error_empty_fields">Please fill all fields</string>
     <string name="success_add_source">Water source added successfully</string>
     <string name="error_add_source">Error adding water source</string>
+
 </resources>

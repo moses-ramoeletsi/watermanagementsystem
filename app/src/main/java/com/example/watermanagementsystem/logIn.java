@@ -26,107 +26,105 @@ public class logIn extends AppCompatActivity {
     private FirebaseFirestore db;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.login);
 
-        // Initialize Firebase instances once
-        appAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        appAuth = FirebaseAuth.getInstance ();
+        db = FirebaseFirestore.getInstance ();
 
-        initializeViews();
-        setupClickListeners();
+        initializeViews ();
+        setupClickListeners ();
     }
 
-    private void initializeViews() {
-        useremail = findViewById(R.id.userEmail);
-        userpassword = findViewById(R.id.password);
-        loginButton = findViewById(R.id.login_button);
-        register = findViewById(R.id.signupRedirectText);
+    private void initializeViews () {
+        useremail = findViewById (R.id.userEmail);
+        userpassword = findViewById (R.id.password);
+        loginButton = findViewById (R.id.login_button);
+        register = findViewById (R.id.signupRedirectText);
 
-        loadingBar = new ProgressDialog(this);
-        loadingBar.setCanceledOnTouchOutside(false);
+        loadingBar = new ProgressDialog (this);
+        loadingBar.setCanceledOnTouchOutside (false);
     }
 
-    private void setupClickListeners() {
-        loginButton.setOnClickListener(view -> loginUser());
-        register.setOnClickListener(view -> {
-            startActivity(new Intent(logIn.this, registration.class));
+    private void setupClickListeners () {
+        loginButton.setOnClickListener (view -> loginUser ());
+        register.setOnClickListener (view -> {
+            startActivity (new Intent (logIn.this, registration.class));
         });
     }
 
-    private void loginUser() {
-        String email = useremail.getText().toString().trim();
-        String password = userpassword.getText().toString().trim();
+    private void loginUser () {
+        String email = useremail.getText ().toString ().trim ();
+        String password = userpassword.getText ().toString ().trim ();
 
-        if (TextUtils.isEmpty(email)) {
-            useremail.setError("Email is required");
-            useremail.requestFocus();
+        if ( TextUtils.isEmpty (email) ) {
+            useremail.setError ("Email is required");
+            useremail.requestFocus ();
             return;
         }
 
-        if (TextUtils.isEmpty(password)) {
-            userpassword.setError("Password is required");
-            userpassword.requestFocus();
+        if ( TextUtils.isEmpty (password) ) {
+            userpassword.setError ("Password is required");
+            userpassword.requestFocus ();
             return;
         }
 
-        loadingBar.setTitle("Logging In");
-        loadingBar.setMessage("Please wait...");
-        loadingBar.show();
+        loadingBar.setTitle ("Logging In");
+        loadingBar.setMessage ("Please wait...");
+        loadingBar.show ();
 
-        // Perform login and role check in parallel
-        appAuth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener(authResult -> {
-                    FirebaseUser user = authResult.getUser();
-                    if (user != null) {
-                        db.collection("users").document(user.getUid())
-                                .get()
-                                .addOnSuccessListener(document -> {
-                                    loadingBar.dismiss();
-                                    if (document.exists()) {
-                                        String role = document.getString("role");
-                                        navigateBasedOnRole(role);
+        appAuth.signInWithEmailAndPassword (email, password)
+                .addOnSuccessListener (authResult -> {
+                    FirebaseUser user = authResult.getUser ();
+                    if ( user != null ) {
+                        db.collection ("users").document (user.getUid ())
+                                .get ()
+                                .addOnSuccessListener (document -> {
+                                    loadingBar.dismiss ();
+                                    if ( document.exists () ) {
+                                        String role = document.getString ("role");
+                                        navigateBasedOnRole (role);
                                     } else {
-                                        showError("User document not found");
+                                        showError ("User document not found");
                                     }
                                 })
-                                .addOnFailureListener(e -> showError("Failed to fetch user role: " + e.getMessage()));
+                                .addOnFailureListener (e -> showError ("Failed to fetch user role: " + e.getMessage ()));
                     }
                 })
-                .addOnFailureListener(e -> showError("Login failed: " + e.getMessage()));
+                .addOnFailureListener (e -> showError ("Login failed: " + e.getMessage ()));
     }
 
-    private void navigateBasedOnRole(String role) {
+    private void navigateBasedOnRole (String role) {
         Intent intent = null;
-        if (role == null) {
-            showError("User role not found");
+        if ( role == null ) {
+            showError ("User role not found");
             return;
         }
 
-        switch (role) {
-            case "Admin":
-                intent = new Intent(this, AdminPage.class);
+        switch ( role ) {
+            case "admin":
+                intent = new Intent (this, AdminPage.class);
                 break;
             case "waterAuthority":
-                intent = new Intent(this, WaterAuthorityPage.class);
+                intent = new Intent (this, WaterAuthorityPage.class);
                 break;
             case "user":
-                intent = new Intent(this, residentsHomepage.class);
+                intent = new Intent (this, residentsHomepage.class);
                 break;
             default:
-                showError("Unknown user role: " + role);
+                showError ("Unknown user role: " + role);
                 return;
         }
 
-        if (intent != null) {
-            startActivity(intent);
-            finish();
+        if ( intent != null ) {
+            startActivity (intent);
+            finish ();
         }
     }
 
-    private void showError(String message) {
-        loadingBar.dismiss();
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    private void showError (String message) {
+        loadingBar.dismiss ();
+        Toast.makeText (this, message, Toast.LENGTH_SHORT).show ();
     }
 }
