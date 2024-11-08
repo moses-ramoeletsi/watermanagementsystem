@@ -65,14 +65,15 @@ public class UserProfile extends AppCompatActivity {
 
     private void populateUserDetails (DocumentSnapshot documentSnapshot) {
         if ( documentSnapshot.exists () ) {
+            String name = documentSnapshot.getString ("name");
             String email = documentSnapshot.getString ("email");
             String phone = documentSnapshot.getString ("contacts");
             String addr = documentSnapshot.getString ("residentialAddress");
             String nationalIdVal = documentSnapshot.getString ("nationalId");
 
-            if ( email != null && ! email.isEmpty () ) {
+            if ( name != null && ! name.isEmpty () ) {
                 avatarText.setText (String.valueOf (email.charAt (0)).toUpperCase ());
-                userEmail.setText (email);
+                userEmail.setText (name);
             }
 
             if ( phone != null ) {

@@ -1,5 +1,6 @@
 package com.example.watermanagementsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -94,6 +95,11 @@ public class ViewUserFeedBack extends AppCompatActivity implements FeedbackAdapt
                         feedback.setFeedbackId (document.getId ()); // Ensure feedback ID is set
                         feedbackList.add (feedback);
                     }
+                    if ( feedbackList.isEmpty () ) {
+                        Toast.makeText (ViewUserFeedBack.this, "No feedbacks available", Toast.LENGTH_SHORT).show ();
+                        Intent intent = new Intent (this, AdminPage.class);
+                        startActivity (intent);
+                    }
                     adapter.setFeedbackList (feedbackList);
                     progressBar.setVisibility (View.GONE);
                 })
@@ -122,13 +128,12 @@ public class ViewUserFeedBack extends AppCompatActivity implements FeedbackAdapt
 
     @Override
     public void onDelete (String feedbackId) {
-        // Implement functionality to delete feedback for admins
         if ( isAdmin ) {
             db.collection ("feedbacks").document (feedbackId)
                     .delete ()
                     .addOnSuccessListener (aVoid -> {
                         Toast.makeText (this, "Feedback deleted successfully", Toast.LENGTH_SHORT).show ();
-                        loadFeedbacks (); // Refresh feedback list after deletion
+                        loadFeedbacks ();
                     })
                     .addOnFailureListener (e -> Toast.makeText (this, "Failed to delete feedback: " + e.getMessage (), Toast.LENGTH_SHORT).show ());
         } else {

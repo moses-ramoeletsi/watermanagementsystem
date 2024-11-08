@@ -108,6 +108,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -116,11 +117,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagement extends AppCompatActivity {
+    private RecyclerView userRecyclerView, authRecyclerView;
     private FirebaseFirestore db;
     private UserAdapter userAdapter;
     private WaterAuthorityAdapter waterAuthorityAdapter;
     private TextView userCountTextView;
     private TextView authCountTextView;
+
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -129,16 +132,22 @@ public class UserManagement extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance ();
 
+
         userCountTextView = findViewById (R.id.userCountTextView);
         authCountTextView = findViewById (R.id.authCountTextView);
-        RecyclerView userRecyclerView = findViewById (R.id.userRecyclerView);
+
+        userRecyclerView = findViewById (R.id.userRecyclerView);
+
         userAdapter = new UserAdapter ();
-        userRecyclerView.setLayoutManager (new LinearLayoutManager (this));
+        LinearLayoutManager userLayoutManager = new LinearLayoutManager (this, LinearLayoutManager.HORIZONTAL, false);
+        userRecyclerView.setLayoutManager (userLayoutManager);
         userRecyclerView.setAdapter (userAdapter);
 
-        RecyclerView authRecyclerView = findViewById (R.id.authRecyclerView);
+        authRecyclerView = findViewById (R.id.authRecyclerView);
+
         waterAuthorityAdapter = new WaterAuthorityAdapter ();
-        authRecyclerView.setLayoutManager (new LinearLayoutManager (this));
+        LinearLayoutManager waterAuthLayoutManager = new LinearLayoutManager (this, LinearLayoutManager.HORIZONTAL, false);
+        authRecyclerView.setLayoutManager (waterAuthLayoutManager);
         authRecyclerView.setAdapter (waterAuthorityAdapter);
 
         fetchUsers ();
@@ -146,6 +155,7 @@ public class UserManagement extends AppCompatActivity {
     }
 
     private void fetchWaterAuthorities () {
+
         List<WaterAuthorityModel> authorities = new ArrayList<> ();
 
         db.collection ("users")
@@ -168,6 +178,7 @@ public class UserManagement extends AppCompatActivity {
     }
 
     private void fetchUsers () {
+     
         List<UserModel> users = new ArrayList<> ();
 
         db.collection ("users")

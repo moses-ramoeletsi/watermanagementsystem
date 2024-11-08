@@ -45,7 +45,6 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
         holder.detailsText.setText (feedback.getDetails ());
 
         if ( isAdmin ) {
-            // Admin view: allow response actions
             holder.responseEditText.setVisibility (View.VISIBLE);
             if ( feedback.getAdminResponse () != null && ! feedback.getAdminResponse ().isEmpty () ) {
                 holder.adminResponseText.setVisibility (View.VISIBLE);
@@ -97,8 +96,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
                 holder.adminResponseText.setVisibility (View.GONE);
             }
         }
-
-        // Common buttons for both admin and regular users
+        
         holder.editButton.setVisibility (View.VISIBLE);
         holder.deleteButton.setVisibility (View.VISIBLE);
 

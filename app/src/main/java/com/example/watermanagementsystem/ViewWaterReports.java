@@ -39,12 +39,17 @@ public class ViewWaterReports extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance ();
         auth = FirebaseAuth.getInstance ();
+
         adapter = new ViewRportedIssuesAdapter ();
-        recyclerView.setLayoutManager (new LinearLayoutManager (this));
+
+        LinearLayoutManager issuesLayoutManager = new LinearLayoutManager (this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager (issuesLayoutManager);
         recyclerView.setAdapter (adapter);
 
         sourcesAdapter = new ViewWaterSourceAdapter ();
-        sourceRecylcerView.setLayoutManager (new LinearLayoutManager (this));
+
+        LinearLayoutManager sourcesLayoutManager = new LinearLayoutManager (this, LinearLayoutManager.HORIZONTAL, false);
+        sourceRecylcerView.setLayoutManager (sourcesLayoutManager);
         sourceRecylcerView.setAdapter (sourcesAdapter);
         loadWaterIssues ();
         loadWaterSources ();
