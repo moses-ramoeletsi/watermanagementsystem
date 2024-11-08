@@ -26,99 +26,87 @@ public class UserProfile extends AppCompatActivity {
     private Button logoutButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_user_profile);
-        db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
+        EdgeToEdge.enable (this);
+        setContentView (R.layout.activity_user_profile);
+        db = FirebaseFirestore.getInstance ();
+        mAuth = FirebaseAuth.getInstance ();
 
-        avatarText = findViewById(R.id.avatar_text);
-        logoutButton = findViewById(R.id.logoutButton);
+        avatarText = findViewById (R.id.avatar_text);
+        logoutButton = findViewById (R.id.logoutButton);
 
-        logoutButton.setOnClickListener(v -> showLogoutConfirmationDialog());
-        initViews();
-        setupUserDetails();
+        logoutButton.setOnClickListener (v -> showLogoutConfirmationDialog ());
+        initViews ();
+        setupUserDetails ();
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+        ViewCompat.setOnApplyWindowInsetsListener (findViewById (R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets (WindowInsetsCompat.Type.systemBars ());
+            v.setPadding (systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
     }
 
-    private void initViews() {
-        userEmail = findViewById(R.id.userEmail);
-        phoneNumber = findViewById(R.id.phoneNumber);
-        address = findViewById(R.id.address);
-        nationalId = findViewById(R.id.nationalId);
+    private void initViews () {
+        userEmail = findViewById (R.id.userEmail);
+        phoneNumber = findViewById (R.id.phoneNumber);
+        address = findViewById (R.id.address);
+        nationalId = findViewById (R.id.nationalId);
     }
 
-    private void setupUserDetails() {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            db.collection("users").document(currentUser.getUid())
-                    .get()
-                    .addOnSuccessListener(this::populateUserDetails)
-                    .addOnFailureListener(e -> {
+    private void setupUserDetails () {
+        FirebaseUser currentUser = mAuth.getCurrentUser ();
+        if ( currentUser != null ) {
+            db.collection ("users").document (currentUser.getUid ()).get ().addOnSuccessListener (this::populateUserDetails).addOnFailureListener (e -> {
 
-                    });
+            });
         }
     }
 
-    private void populateUserDetails(DocumentSnapshot documentSnapshot) {
-        if (documentSnapshot.exists()) {
-            String email = documentSnapshot.getString("email");
-            String phone = documentSnapshot.getString("contacts");
-            String addr = documentSnapshot.getString("residentialAddress");
-            String nationalIdVal = documentSnapshot.getString("nationalId");
+    private void populateUserDetails (DocumentSnapshot documentSnapshot) {
+        if ( documentSnapshot.exists () ) {
+            String email = documentSnapshot.getString ("email");
+            String phone = documentSnapshot.getString ("contacts");
+            String addr = documentSnapshot.getString ("residentialAddress");
+            String nationalIdVal = documentSnapshot.getString ("nationalId");
 
-            if (email != null && !email.isEmpty()) {
-                avatarText.setText(String.valueOf(email.charAt(0)).toUpperCase());
-                userEmail.setText(email);
+            if ( email != null && ! email.isEmpty () ) {
+                avatarText.setText (String.valueOf (email.charAt (0)).toUpperCase ());
+                userEmail.setText (email);
             }
 
-            if (phone != null) {
-                phoneNumber.setText(phone);
+            if ( phone != null ) {
+                phoneNumber.setText (phone);
             }
-            if (addr != null) {
-                address.setText(addr);
+            if ( addr != null ) {
+                address.setText (addr);
             }
-            if (nationalIdVal != null) {
-                nationalId.setText(nationalIdVal);
+            if ( nationalIdVal != null ) {
+                nationalId.setText (nationalIdVal);
             }
         }
     }
 
-    private void showLogoutConfirmationDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("Logout")
-                .setMessage("Are you sure you want to logout?")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    logout();
-                })
-                .setNegativeButton("No", (dialog, which) -> {
-                    dialog.dismiss();
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+    private void showLogoutConfirmationDialog () {
+        new AlertDialog.Builder (this).setTitle ("Logout").setMessage ("Are you sure you want to logout?").setPositiveButton ("Yes", (dialog, which) -> {
+            logout ();
+        }).setNegativeButton ("No", (dialog, which) -> {
+            dialog.dismiss ();
+        }).setIcon (android.R.drawable.ic_dialog_alert).show ();
     }
 
-    private void logout() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Logging out...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+    private void logout () {
+        ProgressDialog progressDialog = new ProgressDialog (this);
+        progressDialog.setMessage ("Logging out...");
+        progressDialog.setCancelable (false);
+        progressDialog.show ();
 
-        // Perform logout
-        mAuth.signOut();
+        mAuth.signOut ();
 
-        // Dismiss progress dialog and navigate to login screen
-        progressDialog.dismiss();
-        Intent intent = new Intent(this, logIn.class);
-        // Clear the back stack so user can't go back after logging out
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
+        progressDialog.dismiss ();
+        Intent intent = new Intent (this, logIn.class);
+        intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity (intent);
+        finish ();
     }
 }

@@ -61,6 +61,11 @@ public class AdminPage extends AppCompatActivity {
             startActivity (intent);
         });
 
+        findViewById (R.id.card_manage_feedback).setOnClickListener (v -> {
+            Intent intent = new Intent (this, ViewUserFeedBack.class);
+            startActivity (intent);
+        });
+
         findViewById (R.id.card_user_profile).setOnClickListener (v -> {
             Intent intent = new Intent (this, UserProfile.class);
             startActivity (intent);

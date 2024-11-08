@@ -3,37 +3,88 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/feedbackTypeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Feedback Type"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/detailsText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Details" />
+        android:layout_marginTop="8dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/adminResponseText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textStyle="italic"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/responseEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your response here"
+        android:minLines="2"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="end">
+        android:layout_marginTop="8dp">
 
         <Button
             android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit" />
+            android:text="Edit"
+            android:layout_marginEnd="4dp" />
 
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete" />
+            android:text="Delete"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/respondButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Respond"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/editResponseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Response"
+            android:visibility="gone"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/deleteResponseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Response"
+            android:visibility="gone" />
     </LinearLayout>
+
 </LinearLayout>
