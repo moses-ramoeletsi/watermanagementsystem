@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class UserDetails implements Parcelable {
-    private String userId;  // Added field for Firebase user ID
+    private String userId;
     private String name;
     private String nationalId;
     private String email;
@@ -13,13 +13,12 @@ public class UserDetails implements Parcelable {
     private String contacts;
     private String role;
 
-    public UserDetails() {
-        // Required empty constructor for Firestore
+    public UserDetails () {
     }
 
-    public UserDetails(String userId, String name, String nationalId, String email,
-                       String residentialAddress, String physicalAddress,
-                       String contacts) {
+    public UserDetails (String userId, String name, String nationalId, String email,
+                        String residentialAddress, String physicalAddress,
+                        String contacts, String role) {
         this.userId = userId;
         this.name = name;
         this.nationalId = nationalId;
@@ -27,111 +26,109 @@ public class UserDetails implements Parcelable {
         this.residentialAddress = residentialAddress;
         this.physicalAddress = physicalAddress;
         this.contacts = contacts;
-        this.role = role;
+        this.role = this.role;
     }
 
-    // Getters and setters for existing fields...
-    public String getUserId() {
+    public String getUserId () {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId (String userId) {
         this.userId = userId;
     }
 
-    public String getName() {
+    public String getName () {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName (String name) {
         this.name = name;
     }
 
-    public String getNationalId() {
+    public String getNationalId () {
         return nationalId;
     }
 
-    public void setNationalId(String nationalId) {
+    public void setNationalId (String nationalId) {
         this.nationalId = nationalId;
     }
 
-    public String getEmail() {
+    public String getEmail () {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail (String email) {
         this.email = email;
     }
 
-    public String getResidentialAddress() {
+    public String getResidentialAddress () {
         return residentialAddress;
     }
 
-    public void setResidentialAddress(String residentialAddress) {
+    public void setResidentialAddress (String residentialAddress) {
         this.residentialAddress = residentialAddress;
     }
 
-    public String getPhysicalAddress() {
+    public String getPhysicalAddress () {
         return physicalAddress;
     }
 
-    public void setPhysicalAddress(String physicalAddress) {
+    public void setPhysicalAddress (String physicalAddress) {
         this.physicalAddress = physicalAddress;
     }
 
-    public String getContacts() {
+    public String getContacts () {
         return contacts;
     }
 
-    public void setContacts(String contacts) {
+    public void setContacts (String contacts) {
         this.contacts = contacts;
     }
 
-    public String getRole() {
+    public String getRole () {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole (String role) {
         this.role = role;
     }
 
-    // Parcelable implementation
-    protected UserDetails(Parcel in) {
-        userId = in.readString();
-        name = in.readString();
-        nationalId = in.readString();
-        email = in.readString();
-        residentialAddress = in.readString();
-        physicalAddress = in.readString();
-        contacts = in.readString();
-        role = in.readString();
+    protected UserDetails (Parcel in) {
+        userId = in.readString ();
+        name = in.readString ();
+        nationalId = in.readString ();
+        email = in.readString ();
+        residentialAddress = in.readString ();
+        physicalAddress = in.readString ();
+        contacts = in.readString ();
+        role = in.readString ();
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(userId);
-        dest.writeString(name);
-        dest.writeString(nationalId);
-        dest.writeString(email);
-        dest.writeString(residentialAddress);
-        dest.writeString(physicalAddress);
-        dest.writeString(contacts);
-        dest.writeString(role);
+    public void writeToParcel (Parcel dest, int flags) {
+        dest.writeString (userId);
+        dest.writeString (name);
+        dest.writeString (nationalId);
+        dest.writeString (email);
+        dest.writeString (residentialAddress);
+        dest.writeString (physicalAddress);
+        dest.writeString (contacts);
+        dest.writeString (role);
     }
 
     @Override
-    public int describeContents() {
+    public int describeContents () {
         return 0;
     }
 
-    public static final Creator<UserDetails> CREATOR = new Creator<UserDetails>() {
+    public static final Creator<UserDetails> CREATOR = new Creator<UserDetails> () {
         @Override
-        public UserDetails createFromParcel(Parcel in) {
-            return new UserDetails(in);
+        public UserDetails createFromParcel (Parcel in) {
+            return new UserDetails (in);
         }
 
         @Override
-        public UserDetails[] newArray(int size) {
+        public UserDetails[] newArray (int size) {
             return new UserDetails[size];
         }
     };
