@@ -8,60 +8,93 @@
     android:background="@drawable/waterbackground"
     tools:context=".WaterAuthorityPage">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/avatar_card"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="4dp">
+    <LinearLayout
+        android:id="@+id/header_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:background="#80FFFFFF">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/avatar_card"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="8dp">
+
+            <TextView
+                android:id="@+id/avatar_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/purple_700"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/avatar_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/purple_700"
-            android:gravity="center"
-            android:textColor="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Water Auth Dashboard"
             android:textSize="24sp"
-            android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"
+            android:layout_marginStart="16dp" />
+    </LinearLayout>
 
 
     <GridLayout
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/avatar_card"
+        android:layout_below="@id/header_section"
+        android:layout_marginTop="16dp"
         android:padding="16dp"
         android:columnCount="2"
-        android:rowCount="3"
-        android:alignmentMode="alignMargins"
-        android:useDefaultMargins="true">
-
+        android:rowCount="2"
+        android:alignmentMode="alignMargins">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_reported_issue"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="8dp">
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/ripple_effect">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_water_drop"
+                    app:tint="@color/purple_700" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Reported Issues"
-                    android:textColor="@color/black"
+                    android:textColor="@color/purple_700"
                     android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Manage water-related problems"
+                    android:textColor="#757575"
+                    android:textSize="12sp"
                     android:gravity="center" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -69,25 +102,41 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_water_sources"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="8dp">
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/ripple_effect">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_reported_water_issues"
+                    app:tint="@color/purple_700" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Water Source"
-                    android:textColor="@color/black"
+                    android:textColor="@color/purple_700"
                     android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add information about water source"
+                    android:textColor="#757575"
+                    android:textSize="12sp"
                     android:gravity="center" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -96,25 +145,41 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_data_insights"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="8dp">
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/ripple_effect">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_data_insight"
+                    app:tint="@color/purple_700" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Data Insights"
-                    android:textColor="@color/black"
+                    android:text="Water Source"
+                    android:textColor="@color/purple_700"
                     android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View information about your water source"
+                    android:textColor="#757575"
+                    android:textSize="12sp"
                     android:gravity="center" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -122,25 +187,41 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_contact_authorities"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="8dp">
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/ripple_effect">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/ic_content"
+                    app:tint="@color/purple_700" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User Content"
-                    android:textColor="@color/black"
+                    android:text="Water Source"
+                    android:textColor="@color/purple_700"
                     android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View information about your water source"
+                    android:textColor="#757575"
+                    android:textSize="12sp"
                     android:gravity="center" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -175,28 +256,43 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_user_profile"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="8dp">
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/ripple_effect">
+
+                <ImageView
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:src="@drawable/baseline_person_24"
+                    app:tint="@color/purple_700" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Profile"
-                    android:textColor="@color/black"
+                    android:textColor="@color/purple_700"
                     android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Manage your profile"
+                    android:textColor="#757575"
+                    android:textSize="12sp"
                     android:gravity="center" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </GridLayout>
 </RelativeLayout>

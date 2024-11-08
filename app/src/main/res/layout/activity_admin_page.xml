@@ -7,6 +7,7 @@
     android:background="@drawable/waterbackground"
     tools:context=".AdminPage">
 
+
     <LinearLayout
         android:id="@+id/header_section"
         android:layout_width="match_parent"
@@ -55,7 +56,6 @@
         android:rowCount="2"
         android:alignmentMode="alignMargins">
 
-        <!-- Water Issues Card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_water_issue"
             android:layout_width="0dp"
