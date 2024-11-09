@@ -64,7 +64,9 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change Maintenance Date" />
+            android:text="Change Maintenance Date"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/ocean_deep" />
 
         <TextView
             android:id="@+id/editLastMaintenanceDateText"

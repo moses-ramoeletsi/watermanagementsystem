@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:text="Create Account"
                     android:textAlignment="center"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.02"
@@ -53,12 +53,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"
-                    app:boxStrokeColor="@color/blue"
-                    app:hintTextColor="@color/blue"
+                    app:boxStrokeColor="@color/ocean_deep"
+                    app:hintTextColor="@color/ocean_deep"
                     android:hint="Full Name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/baseline_person_24"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/ocean_deep">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/name"
@@ -72,12 +72,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxStrokeColor="@color/blue"
-                    app:hintTextColor="@color/blue"
+                    app:boxStrokeColor="@color/ocean_deep"
+                    app:hintTextColor="@color/ocean_deep"
                     android:hint="Email Address"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/baseline_email_24"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/ocean_deep">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
@@ -97,12 +97,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        app:boxStrokeColor="@color/blue"
-                        app:hintTextColor="@color/blue"
+                        app:boxStrokeColor="@color/ocean_deep"
+                        app:hintTextColor="@color/ocean_deep"
                         android:hint="National ID Number"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:startIconDrawable="@drawable/baseline_perm_identity_24"
-                        app:startIconTint="@color/blue">
+                        app:startIconTint="@color/ocean_deep">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/nationalId"
@@ -123,12 +123,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        app:boxStrokeColor="@color/blue"
-                        app:hintTextColor="@color/blue"
+                        app:boxStrokeColor="@color/ocean_deep"
+                        app:hintTextColor="@color/ocean_deep"
                         android:hint="Residential Address"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:startIconDrawable="@drawable/baseline_location_on_24"
-                        app:startIconTint="@color/blue">
+                        app:startIconTint="@color/ocean_deep">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/residentialAddress"
@@ -150,12 +150,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        app:boxStrokeColor="@color/blue"
-                        app:hintTextColor="@color/blue"
+                        app:boxStrokeColor="@color/ocean_deep"
+                        app:hintTextColor="@color/ocean_deep"
                         android:hint="Physical Address"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:startIconDrawable="@drawable/baseline_location_on_24"
-                        app:startIconTint="@color/blue">
+                        app:startIconTint="@color/ocean_deep">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/physicalAddress"
@@ -170,12 +170,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxStrokeColor="@color/blue"
-                    app:hintTextColor="@color/blue"
+                    app:boxStrokeColor="@color/ocean_deep"
+                    app:hintTextColor="@color/ocean_deep"
                     android:hint="Contact Number"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/baseline_contact_phone_24"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/ocean_deep">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/contacts"
@@ -190,12 +190,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxStrokeColor="@color/blue"
-                    app:hintTextColor="@color/blue"
+                    app:boxStrokeColor="@color/ocean_deep"
+                    app:hintTextColor="@color/ocean_deep"
                     android:hint="Password"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/baseline_lock_24"
-                    app:startIconTint="@color/blue"
+                    app:startIconTint="@color/ocean_deep"
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -210,12 +210,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:boxStrokeColor="@color/blue"
-                    app:hintTextColor="@color/blue"
+                    app:boxStrokeColor="@color/ocean_deep"
+                    app:hintTextColor="@color/ocean_deep"
                     android:hint="Confirm Password"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/baseline_lock_24"
-                    app:startIconTint="@color/blue"
+                    app:startIconTint="@color/ocean_deep"
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -232,10 +232,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="Select Role"
-                    app:boxStrokeColor="@color/blue"
-                    app:hintTextColor="@color/blue"
+                    app:boxStrokeColor="@color/ocean_deep"
+                    app:hintTextColor="@color/ocean_deep"
                     app:startIconDrawable="@drawable/baseline_person_24"
-                    app:startIconTint="@color/blue">
+                    app:startIconTint="@color/ocean_deep">
 
                     <Spinner
                         android:id="@+id/roleSpinner"
@@ -254,6 +254,7 @@
                     android:text="Create Account"
                     android:textSize="14sp"
                     android:textAllCaps="false"
+                    android:backgroundTint="@color/ocean_deep"
                     app:cornerRadius="8dp"
                     android:letterSpacing="0.02"
                     app:elevation="4dp" />
@@ -270,7 +271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Already have an account? "
-                        android:textColor="#78909C"
+                        android:textColor="#000"
                         android:textSize="14sp" />
 
                     <TextView
@@ -278,7 +279,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Login"
-                        android:textColor="@color/blue"
+                        android:textColor="@color/ocean_deep"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:padding="4dp" />

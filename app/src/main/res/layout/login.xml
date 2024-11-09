@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="Welcome Back"
                 android:textAlignment="center"
-                android:textColor="@color/blue"
+                android:textColor="@color/ocean_deep"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.02"
@@ -50,12 +50,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                app:boxStrokeColor="@color/blue"
-                app:hintTextColor="@color/blue"
+                app:boxStrokeColor="@color/ocean_deep"
+                app:hintTextColor="@color/ocean_deep"
                 android:hint="Email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconDrawable="@drawable/baseline_email_24"
-                app:startIconTint="@color/blue">
+                app:startIconTint="@color/ocean_deep">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/userEmail"
@@ -70,12 +70,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                app:boxStrokeColor="@color/blue"
-                app:hintTextColor="@color/blue"
+                app:boxStrokeColor="@color/ocean_deep"
+                app:hintTextColor="@color/ocean_deep"
                 android:hint="Password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconDrawable="@drawable/baseline_lock_24"
-                app:startIconTint="@color/blue"
+                app:startIconTint="@color/ocean_deep"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -94,6 +94,7 @@
                 android:layout_height="64dp"
                 android:layout_marginTop="20dp"
                 android:text="Login"
+                android:backgroundTint="@color/ocean_deep"
                 android:textSize="16sp"
                 android:textAllCaps="false"
                 app:cornerRadius="16dp"
@@ -119,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sign Up"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:padding="4dp" />

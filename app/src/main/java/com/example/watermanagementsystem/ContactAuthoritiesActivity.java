@@ -33,79 +33,78 @@ public class ContactAuthoritiesActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_contact_authorities);
-        db = FirebaseFirestore.getInstance();
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
 
-        // Initialize views
-        recyclerView = findViewById(R.id.authoritiesRecyclerView);
-        errorMessageTextView = findViewById(R.id.errorMessageTextView);
-        progressBar = findViewById(R.id.progressBar);
+        setContentView (R.layout.activity_contact_authorities);
+        db = FirebaseFirestore.getInstance ();
 
-        // Setup RecyclerView
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AuthoritiesAdapter(this, new ArrayList<>(), authority -> {
-            Intent intent = new Intent(this, ContactFormActivity.class);
-            intent.putExtra("selected_authority", authority);
-            startActivity(intent);
+
+        recyclerView = findViewById (R.id.authoritiesRecyclerView);
+        errorMessageTextView = findViewById (R.id.errorMessageTextView);
+        progressBar = findViewById (R.id.progressBar);
+
+
+        recyclerView.setLayoutManager (new LinearLayoutManager (this));
+        adapter = new AuthoritiesAdapter (this, new ArrayList<> (), authority -> {
+            Intent intent = new Intent (this, ContactFormActivity.class);
+            intent.putExtra ("selected_authority", authority);
+            startActivity (intent);
         });
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter (adapter);
 
-        // Load authorities
-        loadWaterAuthorities();
+        loadWaterAuthorities ();
     }
 
 
-    private void loadWaterAuthorities() {
-        showProgress();
+    private void loadWaterAuthorities () {
+        showProgress ();
 
-        db.collection("users")
-                .whereEqualTo("role", "waterAuthority")
-                .get()
-                .addOnCompleteListener(task -> {
-                    hideProgress();
+        db.collection ("users")
+                .whereEqualTo ("role", "waterAuthority")
+                .get ()
+                .addOnCompleteListener (task -> {
+                    hideProgress ();
 
-                    if (task.isSuccessful()) {
-                        List<UserDetails> authorities = new ArrayList<>();
+                    if ( task.isSuccessful () ) {
+                        List<UserDetails> authorities = new ArrayList<> ();
 
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            UserDetails authority = document.toObject(UserDetails.class);
-                            authority.setUserId(document.getId()); // Set the document ID as userId
-                            authorities.add(authority);
+                        for ( QueryDocumentSnapshot document : task.getResult () ) {
+                            UserDetails authority = document.toObject (UserDetails.class);
+                            authority.setUserId (document.getId ()); // Set the document ID as userId
+                            authorities.add (authority);
                         }
 
-                        if (authorities.isEmpty()) {
-                            showError();
+                        if ( authorities.isEmpty () ) {
+                            showError ();
                         } else {
-                            showAuthorities(authorities);
+                            showAuthorities (authorities);
                         }
                     } else {
-                        showError();
-                        Log.e("ContactAuthorities", "Error getting authorities", task.getException());
+                        showError ();
+                        Log.e ("ContactAuthorities", "Error getting authorities", task.getException ());
                     }
                 });
     }
 
-    private void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
-        errorMessageTextView.setVisibility(View.GONE);
+    private void showProgress () {
+        progressBar.setVisibility (View.VISIBLE);
+        recyclerView.setVisibility (View.GONE);
+        errorMessageTextView.setVisibility (View.GONE);
     }
 
-    private void hideProgress() {
-        progressBar.setVisibility(View.GONE);
+    private void hideProgress () {
+        progressBar.setVisibility (View.GONE);
     }
 
-    private void showError() {
-        errorMessageTextView.setVisibility(View.VISIBLE);
-        recyclerView.setVisibility(View.GONE);
+    private void showError () {
+        errorMessageTextView.setVisibility (View.VISIBLE);
+        recyclerView.setVisibility (View.GONE);
     }
 
-    private void showAuthorities(List<UserDetails> authorities) {
-        recyclerView.setVisibility(View.VISIBLE);
-        errorMessageTextView.setVisibility(View.GONE);
-        adapter.updateAuthorities(authorities);
+    private void showAuthorities (List<UserDetails> authorities) {
+        recyclerView.setVisibility (View.VISIBLE);
+        errorMessageTextView.setVisibility (View.GONE);
+        adapter.updateAuthorities (authorities);
     }
 }

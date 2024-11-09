@@ -96,7 +96,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
                 holder.adminResponseText.setVisibility (View.GONE);
             }
         }
-        
+
         holder.editButton.setVisibility (View.VISIBLE);
         holder.deleteButton.setVisibility (View.VISIBLE);
 
@@ -262,7 +262,6 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
 
         public FeedbackViewHolder (@NonNull View itemView) {
             super (itemView);
-            // Initialize all views
             feedbackTypeText = itemView.findViewById (R.id.feedbackTypeText);
             detailsText = itemView.findViewById (R.id.detailsText);
             adminResponseText = itemView.findViewById (R.id.adminResponseText);

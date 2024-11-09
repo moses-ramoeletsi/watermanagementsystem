@@ -1,5 +1,6 @@
 package com.example.watermanagementsystem;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -29,6 +31,15 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
     private SimpleDateFormat dateFormat;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
+    private OnStatusUpdateListener statusUpdateListener;
+
+    public interface OnStatusUpdateListener {
+        void onStatusUpdate (String reportId, String newStatus);
+    }
+
+    public void setOnStatusUpdateListener (OnStatusUpdateListener listener) {
+        this.statusUpdateListener = listener;
+    }
 
     public WaterIssuesAdapter () {
         this.issues = new ArrayList<> ();
@@ -47,10 +58,14 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
         TextView phoneNumber;
         TextView lastUpdatedBy;
         View statusButton;
+        TextView resolvedOverlay;
+        View contentLayout;
 
         public WaterIssueViewHolder (@NonNull View itemView) {
             super (itemView);
+            contentLayout = itemView.findViewById (R.id.contentLayout);
             issueImage = itemView.findViewById (R.id.issueImage);
+            resolvedOverlay = itemView.findViewById (R.id.resolvedOverlay);
             issueType = itemView.findViewById (R.id.issueType);
             location = itemView.findViewById (R.id.location);
             status = itemView.findViewById (R.id.status);
@@ -74,14 +89,18 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
     public void onBindViewHolder (@NonNull WaterIssueViewHolder holder, int position) {
         WaterIssue issue = issues.get (position);
 
-        if ( issue.getImageUrl () != null && ! issue.getImageUrl ().isEmpty () ) {
-            holder.issueImage.setVisibility (View.VISIBLE);
-            Glide.with (holder.itemView.getContext ())
-                    .load (issue.getImageUrl ())
-                    .into (holder.issueImage);
-        } else {
-            holder.issueImage.setVisibility (View.GONE);
-        }
+        boolean isResolved = "Resolved".equals (issue.getStatus ());
+        holder.contentLayout.setVisibility (isResolved ? View.INVISIBLE : View.VISIBLE);
+        holder.resolvedOverlay.setVisibility (isResolved ? View.VISIBLE : View.GONE);
+
+//        if ( issue.getImageUrl () != null && ! issue.getImageUrl ().isEmpty () ) {
+//            holder.issueImage.setVisibility (View.VISIBLE);
+//            Glide.with (holder.itemView.getContext ())
+//                    .load (issue.getImageUrl ())
+//                    .into (holder.issueImage);
+//        } else {
+//            holder.issueImage.setVisibility (View.GONE);
+//        }
 
         holder.issueType.setText ("Issue: " + issue.getIssueType ());
         holder.location.setText ("Location: " + issue.getLocation ());
@@ -106,7 +125,26 @@ public class WaterIssuesAdapter extends RecyclerView.Adapter<WaterIssuesAdapter.
         }
 
         // Setup status update button
-        holder.statusButton.setOnClickListener (v -> showStatusUpdateMenu (v, issue));
+        holder.statusButton.setOnClickListener (v -> {
+            if ( statusUpdateListener != null ) {
+                // Show status selection dialog
+                showStatusUpdateDialog (v.getContext (), issue.getId ());
+            }
+        });
+    }
+
+    private void showStatusUpdateDialog (Context context, String reportId) {
+        String[] statusOptions = { "Pending", "In Progress", "Resolved" };
+
+        new AlertDialog.Builder (context)
+                .setTitle ("Update Status")
+                .setItems (statusOptions, (dialog, which) -> {
+                    String newStatus = statusOptions[which];
+                    if ( statusUpdateListener != null ) {
+                        statusUpdateListener.onStatusUpdate (reportId, newStatus);
+                    }
+                })
+                .show ();
     }
 
     private void showStatusUpdateMenu (View view, WaterIssue issue) {

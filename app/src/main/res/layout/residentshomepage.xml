@@ -27,7 +27,7 @@
                 android:id="@+id/avatar_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/purple_700"
+                android:background="@color/ocean_deep"
                 android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="24sp"
@@ -40,7 +40,7 @@
             android:text="User Dashboard"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/ocean_deep"
             android:layout_marginStart="16dp" />
     </LinearLayout>
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/header_section"
         android:layout_marginTop="16dp"
-        android:padding="16dp"
+        android:padding="10dp"
         android:columnCount="2"
         android:rowCount="2"
         android:alignmentMode="alignMargins">
@@ -77,13 +77,13 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_water_drop"
-                    app:tint="@color/purple_700" />
+                    app:tint="@color/ocean_deep" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Report Issues"
-                    android:textColor="@color/purple_700"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />
@@ -119,13 +119,13 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_track_report"
-                    app:tint="@color/purple_700" />
+                    app:tint="@color/ocean_deep" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Track Report"
-                    android:textColor="@color/purple_700"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />
@@ -161,13 +161,13 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_water_source"
-                    app:tint="@color/purple_700" />
+                    app:tint="@color/ocean_deep" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Water Source"
-                    android:textColor="@color/purple_700"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />
@@ -203,13 +203,13 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_contact_authorities"
-                    app:tint="@color/purple_700" />
+                    app:tint="@color/ocean_deep" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Contact Authority"
-                    android:textColor="@color/purple_700"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />
@@ -245,13 +245,13 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/ic_feedback"
-                    app:tint="@color/purple_700" />
+                    app:tint="@color/ocean_deep" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Manage Feedback"
-                    android:textColor="@color/purple_700"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />
@@ -287,13 +287,13 @@
                     android:layout_width="54dp"
                     android:layout_height="54dp"
                     android:src="@drawable/baseline_person_24"
-                    app:tint="@color/purple_700" />
+                    app:tint="@color/ocean_deep" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Profile"
-                    android:textColor="@color/purple_700"
+                    android:textColor="@color/ocean_deep"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp" />

@@ -6,98 +6,87 @@ public class WaterIssue {
     private String issueType;
     private String location;
     private String status;
-    private String imageUrl;
     private String timestamp;
     private UserInfo userInfo;
     private String lastUpdatedBy;
     private String lastUpdatedAt;
 
-    public WaterIssue(String id, String issueType, String location, String status,
-                      String imageUrl, String timestamp, UserInfo userInfo, String lastUpdatedBy, String lastUpdatedAt) {
+    public WaterIssue (String id, String issueType, String location, String status,
+                       String timestamp, UserInfo userInfo, String lastUpdatedBy, String lastUpdatedAt) {
         this.id = id;
         this.issueType = issueType;
         this.location = location;
         this.status = status;
-        this.imageUrl = imageUrl;
         this.timestamp = timestamp;
         this.userInfo = userInfo;
         this.lastUpdatedBy = lastUpdatedBy;
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
-    public WaterIssue() {
+    public WaterIssue () {
     }
 
-    public String getId() {
+    public String getId () {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId (String id) {
         this.id = id;
     }
 
-    public String getIssueType() {
+    public String getIssueType () {
         return issueType;
     }
 
-    public void setIssueType(String issueType) {
+    public void setIssueType (String issueType) {
         this.issueType = issueType;
     }
 
-    public String getLocation() {
+    public String getLocation () {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation (String location) {
         this.location = location;
     }
 
-    public String getStatus() {
+    public String getStatus () {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus (String status) {
         this.status = status;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getTimestamp() {
+    public String getTimestamp () {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp (String timestamp) {
         this.timestamp = timestamp;
     }
 
-    // New getter and setter for userInfo
-    public UserInfo getUserInfo() {
+    public UserInfo getUserInfo () {
         return userInfo;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
+    public void setUserInfo (UserInfo userInfo) {
         this.userInfo = userInfo;
     }
 
-    public String getLastUpdatedBy() {
+    public String getLastUpdatedBy () {
         return lastUpdatedBy;
     }
 
-    public void setLastUpdatedBy(String lastUpdatedBy) {
+    public void setLastUpdatedBy (String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public String getLastUpdatedAt() {
+    public String getLastUpdatedAt () {
         return lastUpdatedAt;
     }
 
-    public void setLastUpdatedAt(String lastUpdatedAt) {
+    public void setLastUpdatedAt (String lastUpdatedAt) {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 }
@@ -107,36 +96,36 @@ class UserInfo {
     private String phoneNumber;
     private String uid;
 
-    public UserInfo() {
+    public UserInfo () {
     }
 
-    public UserInfo(String email, String phoneNumber, String uid) {
+    public UserInfo (String email, String phoneNumber, String uid) {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.uid = uid;
     }
 
-    public String getEmail() {
+    public String getEmail () {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail (String email) {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
+    public String getPhoneNumber () {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber (String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUid() {
+    public String getUid () {
         return uid;
     }
 
-    public void setUid(String uid) {
+    public void setUid (String uid) {
         this.uid = uid;
     }
 }

@@ -38,5 +38,7 @@
     <string name="error_empty_fields">Please fill all fields</string>
     <string name="success_add_source">Water source added successfully</string>
     <string name="error_add_source">Error adding water source</string>
+    <string name="no_reports_found">No reports found</string>
+    <string name="no_authorities_available">No water authorities available</string>
 
 </resources>

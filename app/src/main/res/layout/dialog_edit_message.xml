@@ -6,17 +6,32 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/editSubjectEditText"
+        android:id="@+id/contentEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Subject" />
-
-    <EditText
-        android:id="@+id/editMessageEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Message"
+        android:hint="Enter message content"
         android:inputType="textMultiLine"
-        android:minLines="3" />
+        android:minLines="3"
+        android:gravity="top|start" />
 
-</LinearLayout>
+</LinearLayout><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:orientation="vertical"-->
+    <!--    android:padding="16dp">-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/editSubjectEditText"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="Subject" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/editMessageEditText"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="Message"-->
+    <!--        android:inputType="textMultiLine"-->
+    <!--        android:minLines="3" />-->
+
+    <!--</LinearLayout>-->

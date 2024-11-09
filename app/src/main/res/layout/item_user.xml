@@ -23,6 +23,7 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/ocean_deep"
                 android:layout_marginStart="8dp"
                 android:textSize="16sp" />
         </LinearLayout>

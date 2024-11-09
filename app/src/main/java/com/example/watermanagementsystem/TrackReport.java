@@ -33,66 +33,59 @@ public class TrackReport extends AppCompatActivity {
     private ReportsAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_track_report);
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_track_report);
 
-        db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance ();
+        mAuth = FirebaseAuth.getInstance ();
 
-        // Initialize views
-        reportsRecyclerView = findViewById(R.id.reportsRecyclerView);
-        noReportsText = findViewById(R.id.noReportsText);
-        progressBar = findViewById(R.id.progressBar);
+        reportsRecyclerView = findViewById (R.id.reportsRecyclerView);
+        noReportsText = findViewById (R.id.noReportsText);
+        progressBar = findViewById (R.id.progressBar);
 
-        // Setup RecyclerView
-        reportsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ReportsAdapter();
-        reportsRecyclerView.setAdapter(adapter);
+        reportsRecyclerView.setLayoutManager (new LinearLayoutManager (this));
+        adapter = new ReportsAdapter ();
+        reportsRecyclerView.setAdapter (adapter);
 
-        // Load reports
-        loadReports();
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        loadReports ();
+
     }
 
-    private void loadReports() {
-        String currentUserId = mAuth.getCurrentUser().getUid();
-        progressBar.setVisibility(View.VISIBLE);
+    private void loadReports () {
+        String currentUserId = mAuth.getCurrentUser ().getUid ();
+        progressBar.setVisibility (View.VISIBLE);
 
-        db.collection("waterIssues")
-                .whereEqualTo("userInfo.uid", currentUserId)  // Query based on nested uid
-                .addSnapshotListener((value, error) -> {
-                    progressBar.setVisibility(View.GONE);
+        db.collection ("waterIssues")
+                .whereEqualTo ("userInfo.uid", currentUserId)
+                .addSnapshotListener ((value, error) -> {
+                    progressBar.setVisibility (View.GONE);
 
-                    if (error != null) {
-                        Toast.makeText(this, "Error loading reports: " + error.getMessage(),
-                                Toast.LENGTH_SHORT).show();
+                    if ( error != null ) {
+                        Toast.makeText (this, "Error loading reports: " + error.getMessage (),
+                                Toast.LENGTH_SHORT).show ();
                         return;
                     }
 
-                    if (value == null || value.isEmpty()) {
-                        noReportsText.setVisibility(View.VISIBLE);
-                        reportsRecyclerView.setVisibility(View.GONE);
+                    if ( value == null || value.isEmpty () ) {
+                        noReportsText.setVisibility (View.VISIBLE);
+                        reportsRecyclerView.setVisibility (View.GONE);
                         return;
                     }
 
-                    List<WaterIssue> reports = new ArrayList<>();
-                    for (DocumentSnapshot doc : value.getDocuments()) {
-                        WaterIssue issue = doc.toObject(WaterIssue.class);
-                        if (issue != null) {
-                            issue.setId(doc.getId());
-                            reports.add(issue);
+                    List<WaterIssue> reports = new ArrayList<> ();
+                    for ( DocumentSnapshot doc : value.getDocuments () ) {
+                        WaterIssue issue = doc.toObject (WaterIssue.class);
+                        if ( issue != null ) {
+                            issue.setId (doc.getId ());
+                            reports.add (issue);
                         }
                     }
 
-                    noReportsText.setVisibility(reports.isEmpty() ? View.VISIBLE : View.GONE);
-                    reportsRecyclerView.setVisibility(reports.isEmpty() ? View.GONE : View.VISIBLE);
-                    adapter.setReports(reports);
+                    noReportsText.setVisibility (reports.isEmpty () ? View.VISIBLE : View.GONE);
+                    reportsRecyclerView.setVisibility (reports.isEmpty () ? View.GONE : View.VISIBLE);
+                    adapter.setReports (reports);
                 });
     }
 

@@ -49,8 +49,8 @@ public class UserFeedBack extends AppCompatActivity implements FeedbackAdapter.F
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
-        EdgeToEdge.enable (this);
         setContentView (R.layout.activity_user_feed_back);
+
 
         initializeFirebase ();
         initializeViews ();
@@ -67,6 +67,20 @@ public class UserFeedBack extends AppCompatActivity implements FeedbackAdapter.F
         submitButton.setOnClickListener (v -> submitFeedback ());
     }
 
+    private void initializeViews () {
+        emailInput = findViewById (R.id.editText_email);
+        contactsInput = findViewById (R.id.editText_contact);
+        feedbackSpinner = findViewById (R.id.autoCompleteTextView_feedbackType);
+        detailsInput = findViewById (R.id.editText_feedbackDetails);
+        submitButton = findViewById (R.id.button_submitFeedback);
+        feedbackRecyclerView = findViewById (R.id.recyclerView_feedback);
+    }
+
+    private void setupRecyclerView () {
+        LinearLayoutManager feedbackLayoutManager = new LinearLayoutManager (this, LinearLayoutManager.HORIZONTAL, false);
+        feedbackRecyclerView.setLayoutManager (feedbackLayoutManager);
+    }
+
     private void initializeFirebase () {
         db = FirebaseFirestore.getInstance ();
         auth = FirebaseAuth.getInstance ();
@@ -74,24 +88,11 @@ public class UserFeedBack extends AppCompatActivity implements FeedbackAdapter.F
         feedbackList = new ArrayList<> ();
     }
 
-    private void initializeViews () {
-        emailInput = findViewById (R.id.emailInput);
-        contactsInput = findViewById (R.id.contactsInput);
-        feedbackSpinner = findViewById (R.id.feedbackSpinner);
-        detailsInput = findViewById (R.id.detailsInput);
-        submitButton = findViewById (R.id.submitButton);
-        feedbackRecyclerView = findViewById (R.id.recyclerViewFeedback);
-    }
-
     private void setupSpinner () {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource (this,
                 R.array.feedback_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource (android.R.layout.simple_spinner_dropdown_item);
         feedbackSpinner.setAdapter (adapter);
-    }
-
-    private void setupRecyclerView () {
-        feedbackRecyclerView.setLayoutManager (new LinearLayoutManager (this));
     }
 
     private void checkIfUserIsAdmin (OnAdminCheckComplete callback) {

@@ -29,76 +29,75 @@ public class ReportedWaterIssues extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_reported_water_issues);
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate (savedInstanceState);
+        setContentView (R.layout.activity_reported_water_issues);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        progressBar = findViewById(R.id.progressBar);
-
-
-        db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
+        recyclerView = findViewById (R.id.recyclerView);
+        progressBar = findViewById (R.id.progressBar);
 
 
-        FirebaseUser currentUser = auth.getCurrentUser();
-        if (currentUser != null) {
-            currentUserEmail = currentUser.getEmail();
+        db = FirebaseFirestore.getInstance ();
+        auth = FirebaseAuth.getInstance ();
+
+        FirebaseUser currentUser = auth.getCurrentUser ();
+        if ( currentUser != null ) {
+            currentUserEmail = currentUser.getEmail ();
         }
 
-        adapter = new WaterIssuesAdapter();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        adapter = new WaterIssuesAdapter ();
+        adapter.setOnStatusUpdateListener (this::updateIssueStatus);
+        recyclerView.setLayoutManager (new LinearLayoutManager (this));
+        recyclerView.setAdapter (adapter);
 
-        loadWaterIssues();
+        loadWaterIssues ();
     }
 
-    private void loadWaterIssues() {
-        progressBar.setVisibility(View.VISIBLE);
+    private void loadWaterIssues () {
+        progressBar.setVisibility (View.VISIBLE);
 
-        db.collection("waterIssues")
-                .orderBy("timestamp", Query.Direction.DESCENDING)
-                .addSnapshotListener((value, error) -> {
-                    progressBar.setVisibility(View.GONE);
+        db.collection ("waterIssues")
+                .orderBy ("timestamp", Query.Direction.DESCENDING)
+                .addSnapshotListener ((value, error) -> {
+                    progressBar.setVisibility (View.GONE);
 
-                    if (error != null) {
-                        Toast.makeText(this, "Error loading issues: " + error.getMessage(),
-                                Toast.LENGTH_LONG).show();
+                    if ( error != null ) {
+                        Toast.makeText (this, "Error loading issues: " + error.getMessage (),
+                                Toast.LENGTH_LONG).show ();
                         return;
                     }
 
-                    if (value != null) {
-                        ArrayList<WaterIssue> issues = new ArrayList<>();
-                        for (com.google.firebase.firestore.DocumentSnapshot doc : value.getDocuments()) {
-                            WaterIssue issue = doc.toObject(WaterIssue.class);
-                            if (issue != null) {
-                                issue.setId(doc.getId());
-                                issues.add(issue);
+                    if ( value != null ) {
+                        ArrayList<WaterIssue> issues = new ArrayList<> ();
+                        for ( com.google.firebase.firestore.DocumentSnapshot doc : value.getDocuments () ) {
+                            WaterIssue issue = doc.toObject (WaterIssue.class);
+                            if ( issue != null ) {
+                                issue.setId (doc.getId ());
+                                issues.add (issue);
                             }
                         }
-                        adapter.updateIssues(issues);
+                        adapter.updateIssues (issues);
                     }
                 });
     }
 
-    public void updateIssueStatus(String reportId, String newStatus) {
-        if (currentUserEmail == null) {
-            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
+    public void updateIssueStatus (String reportId, String newStatus) {
+        if ( currentUserEmail == null ) {
+            Toast.makeText (this, "User not authenticated", Toast.LENGTH_SHORT).show ();
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility (View.VISIBLE);
 
-        db.collection("waterIssues").document(reportId)
-                .update("status", newStatus, "lastUpdatedBy", currentUserEmail)
-                .addOnSuccessListener(aVoid -> {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(this, "Status updated successfully", Toast.LENGTH_SHORT).show();
+        db.collection ("waterIssues").document (reportId)
+                .update ("status", newStatus, "lastUpdatedBy", currentUserEmail)
+                .addOnSuccessListener (aVoid -> {
+                    progressBar.setVisibility (View.GONE);
+                    Toast.makeText (this, "Status updated successfully", Toast.LENGTH_SHORT).show ();
                 })
-                .addOnFailureListener(e -> {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(this, "Failed to update status: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                .addOnFailureListener (e -> {
+                    progressBar.setVisibility (View.GONE);
+                    Toast.makeText (this, "Failed to update status: " + e.getMessage (), Toast.LENGTH_LONG).show ();
                 });
     }
 }

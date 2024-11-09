@@ -32,31 +32,40 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
-        <LinearLayout
+
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:scrollbars="none">
 
-            <Button
-                android:id="@+id/contactButton"
-                android:layout_width="0dp"
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Contact" />
+                android:layout_gravity="center"
+                app:singleLine="true">
 
-            <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/contactButton"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact"
+                    app:chipIcon="@drawable/ic_reply" />
 
-            <Button
-                android:id="@+id/viewMessagesButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="View Messages" />
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content" />
 
-        </LinearLayout>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/viewMessagesButton"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View Message"
+                    app:chipIcon="@drawable/ic_message" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
 
     </LinearLayout>
 

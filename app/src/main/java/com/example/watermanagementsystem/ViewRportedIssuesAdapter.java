@@ -70,14 +70,14 @@ public class ViewRportedIssuesAdapter extends RecyclerView.Adapter<ViewRportedIs
     public void onBindViewHolder (@NonNull ViewRportedIssuesAdapter.ViewReportedIssueViewHolder holder, int position) {
         WaterIssue issue = issues.get (position);
 
-        if ( issue.getImageUrl () != null && ! issue.getImageUrl ().isEmpty () ) {
-            holder.issueImage.setVisibility (View.VISIBLE);
-            Glide.with (holder.itemView.getContext ())
-                    .load (issue.getImageUrl ())
-                    .into (holder.issueImage);
-        } else {
-            holder.issueImage.setVisibility (View.GONE);
-        }
+//        if ( issue.getImageUrl () != null && ! issue.getImageUrl ().isEmpty () ) {
+//            holder.issueImage.setVisibility (View.VISIBLE);
+//            Glide.with (holder.itemView.getContext ())
+//                    .load (issue.getImageUrl ())
+//                    .into (holder.issueImage);
+//        } else {
+//            holder.issueImage.setVisibility (View.GONE);
+//        }
 
         holder.issueType.setText ("Issue: " + issue.getIssueType ());
         holder.location.setText ("Location: " + issue.getLocation ());
