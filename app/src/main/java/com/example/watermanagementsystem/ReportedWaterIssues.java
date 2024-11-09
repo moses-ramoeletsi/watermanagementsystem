@@ -18,6 +18,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
+
 public class ReportedWaterIssues extends AppCompatActivity {
     private RecyclerView recyclerView;
     private WaterIssuesAdapter adapter;

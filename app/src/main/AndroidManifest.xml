@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterManagementSystem"
         tools:targetApi="31">
+
         <activity
             android:name=".ViewUserFeedBack"
             android:exported="false" />
@@ -83,7 +84,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
         <!--        <provider-->
         <!--            android:name="androidx.core.content.FileProvider"-->
         <!--            android:authorities="com.example.watermanagementsystem.fileprovider"-->

@@ -12,7 +12,6 @@ public class Message {
     private String response;
     private String responseAuthorId;
 
-    // Empty constructor for Firebase
     public Message () {
     }
 

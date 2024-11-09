@@ -113,40 +113,18 @@ public class ViewUserFeedBack extends AppCompatActivity implements FeedbackAdapt
 
     @Override
     public void onEdit (FeedBack feedback) {
-        if ( isAdmin ) {
-            db.collection ("feedbacks").document (feedback.getFeedbackId ())
-                    .update ("details", feedback.getDetails ())
-                    .addOnSuccessListener (aVoid -> {
-                        Toast.makeText (this, "Feedback updated successfully", Toast.LENGTH_SHORT).show ();
-                        loadFeedbacks ();
-                    })
-                    .addOnFailureListener (e -> Toast.makeText (this, "Failed to update feedback: " + e.getMessage (), Toast.LENGTH_SHORT).show ());
-        } else {
-            Toast.makeText (this, "Only admins can edit feedback", Toast.LENGTH_SHORT).show ();
-        }
+
     }
 
     @Override
     public void onDelete (String feedbackId) {
-        if ( isAdmin ) {
-            db.collection ("feedbacks").document (feedbackId)
-                    .delete ()
-                    .addOnSuccessListener (aVoid -> {
-                        Toast.makeText (this, "Feedback deleted successfully", Toast.LENGTH_SHORT).show ();
-                        loadFeedbacks ();
-                    })
-                    .addOnFailureListener (e -> Toast.makeText (this, "Failed to delete feedback: " + e.getMessage (), Toast.LENGTH_SHORT).show ());
-        } else {
-            Toast.makeText (this, "Only admins can delete feedback", Toast.LENGTH_SHORT).show ();
-        }
     }
 
     @Override
     public void onRespond (String feedbackId, String response) {
         db.collection ("feedbacks").document (feedbackId)
                 .update (
-                        "adminResponse", response,
-                        "responseTimestamp", System.currentTimeMillis ()
+                        "adminResponse", response
                 )
                 .addOnSuccessListener (aVoid -> {
                     Toast.makeText (ViewUserFeedBack.this,
@@ -163,8 +141,7 @@ public class ViewUserFeedBack extends AppCompatActivity implements FeedbackAdapt
     public void onEditResponse (String feedbackId, String newResponse) {
         db.collection ("feedbacks").document (feedbackId)
                 .update (
-                        "adminResponse", newResponse,
-                        "responseTimestamp", System.currentTimeMillis ()
+                        "adminResponse", newResponse
                 )
                 .addOnSuccessListener (aVoid -> {
                     Toast.makeText (ViewUserFeedBack.this,
@@ -181,8 +158,7 @@ public class ViewUserFeedBack extends AppCompatActivity implements FeedbackAdapt
     public void onDeleteResponse (String feedbackId) {
         db.collection ("feedbacks").document (feedbackId)
                 .update (
-                        "adminResponse", null,
-                        "responseTimestamp", null
+                        "adminResponse", null
                 )
                 .addOnSuccessListener (aVoid -> {
                     Toast.makeText (ViewUserFeedBack.this,

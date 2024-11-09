@@ -11,12 +11,12 @@ public class FeedBack {
 
     private String adminResponse;
     private String adminResponseId;
-    private long responseTimestamp;
+//    private String responseTimestamp;
 
     public FeedBack () {
     }
 
-    public FeedBack (String feedbackId, String userEmail, String userContacts, String feedbackType, String details, String adminResponse, String adminResponseId, long responseTimestamp) {
+    public FeedBack (String feedbackId, String userEmail, String userContacts, String feedbackType, String details, String adminResponse, String adminResponseId) {
         this.feedbackId = feedbackId;
         this.userEmail = userEmail;
         this.userContacts = userContacts;
@@ -24,7 +24,7 @@ public class FeedBack {
         this.details = details;
         this.adminResponse = adminResponse;
         this.adminResponseId = adminResponseId;
-        this.responseTimestamp = responseTimestamp;
+//        this.responseTimestamp = responseTimestamp;
     }
 
     public String getFeedbackId () {
@@ -83,11 +83,11 @@ public class FeedBack {
         this.adminResponseId = adminResponseId;
     }
 
-    public long getResponseTimestamp () {
-        return responseTimestamp;
-    }
-
-    public void setResponseTimestamp (long responseTimestamp) {
-        this.responseTimestamp = responseTimestamp;
-    }
+//    public String getResponseTimestamp () {
+//        return responseTimestamp;
+//    }
+//
+//    public void setResponseTimestamp (String responseTimestamp) {
+//        this.responseTimestamp = responseTimestamp;
+//    }
 }

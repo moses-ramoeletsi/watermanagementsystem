@@ -3,6 +3,7 @@ package com.example.watermanagementsystem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -30,7 +31,7 @@ public class ViewWaterSourceAdapter extends RecyclerView.Adapter<ViewWaterSource
     public static class WaterSourceViewHolder extends RecyclerView.ViewHolder {
         TextView sourceNameText, statusText, descriptionText,
                 directionsText, maintenanceDateText, contactText;
-        ImageButton editButton, deleteButton;
+        Button editButton, deleteButton;
 
         public WaterSourceViewHolder (@NonNull View itemView) {
             super (itemView);

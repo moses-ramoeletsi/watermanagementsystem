@@ -42,13 +42,10 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         Message message = messages.get (position);
         String currentUserId = auth.getCurrentUser () != null ? auth.getCurrentUser ().getUid () : "";
 
-        // Set basic message information
         holder.subjectTextView.setText (message.getSubject ());
         holder.contentTextView.setText (message.getContent ());
         holder.senderNameTextView.setText ("From: " + message.getSenderName ());
         holder.contactsTextView.setText ("Contacts: " + message.getSenderContacts ());
-
-        // Handle response section
         if ( message.getResponse () != null ) {
             holder.responseTextView.setVisibility (View.VISIBLE);
             holder.responseTextView.setText ("Response: " + message.getResponse ());
